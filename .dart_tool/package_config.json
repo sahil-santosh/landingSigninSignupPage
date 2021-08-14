@@ -50,6 +50,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cloud_firestore",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "cloud_firestore_platform_interface",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_platform_interface-5.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "cloud_firestore_web",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "collection",
       "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0",
       "packageUri": "lib/",
@@ -124,6 +142,24 @@
     {
       "name": "firebase_core_web",
       "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_storage",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-10.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_storage_platform_interface",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_platform_interface-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_storage_web",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_web-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -416,7 +452,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-08-12T05:16:51.156723Z",
+  "generated": "2021-08-12T06:49:58.315415Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

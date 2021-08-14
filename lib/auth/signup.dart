@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:landing_page/auth/global_method.dart';
 import 'package:wave/config.dart';
@@ -22,6 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _name = '';
   int _phoneNumber;
   File _pickedImage;
+  String url;
   final _formKey = GlobalKey<FormState>();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   GlobalMethod _globalMethod = GlobalMethod();
@@ -38,16 +42,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void _submitForm() async {
     final isValid = _formKey.currentState.validate();
     FocusScope.of(context).unfocus();
+    var date = DateTime.now().toString();
+    var dateParse = DateTime.parse(date);
+    var formattedDate = '${dateParse.day}-${dateParse.month}-${dateParse.year}';
     if (isValid) {
-      setState(() {
-        _isLoading = true;
-      });
       _formKey.currentState.save();
       try {
-        await _auth.createUserWithEmailAndPassword(
-          email: _emailAddress.toLowerCase().trim(),
-          password: _password.trim(),
-        );
+        if (_pickedImage == null) {
+          _globalMethod.authErrorHandle('Please pick an image', context);
+        } else {
+          setState(() {
+            _isLoading = true;
+          });
+          final ref = FirebaseStorage.instance
+              .ref()
+              .child('userImage')
+              .child(_name + '.jpg');
+          await ref.putFile(_pickedImage);
+          url = await ref.getDownloadURL();
+          await _auth.createUserWithEmailAndPassword(
+            email: _emailAddress.toLowerCase().trim(),
+            password: _password.trim(),
+          );
+          final User user = _auth.currentUser;
+          final _uid = user.uid;
+          await FirebaseFirestore.instance.collection('users').doc(_uid).set({
+            'id': _uid,
+            'name': _name,
+            'email': _emailAddress,
+            'phoneNumber': _phoneNumber,
+            'imageUrl': url,
+            'joinedAt': formattedDate,
+            'createdAt': Timestamp.now(),
+          });
+          Navigator.canPop(context) ? Navigator.pop(context) : null;
+        }
       } catch (error) {
         _globalMethod.authErrorHandle(error.message, context);
         // print('error occured: ${error.message}');
@@ -353,6 +382,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
                             return null;
                           },
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           textInputAction: TextInputAction.next,
                           onEditingComplete: _submitForm,
                           keyboardType: TextInputType.phone,
@@ -376,35 +408,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           SizedBox(width: 10),
-                          _isLoading 
-                          ? CircularProgressIndicator() 
-                          : ElevatedButton(
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.pink.shade400),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      side: BorderSide(
-                                          color: Colors.grey.shade300)),
-                                )),
-                            onPressed: _submitForm,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Signup',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 17,
+                          _isLoading
+                              ? CircularProgressIndicator()
+                              : ElevatedButton(
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.pink.shade400),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            side: BorderSide(
+                                                color: Colors.grey.shade300)),
+                                      )),
+                                  onPressed: _submitForm,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Signup',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                      SizedBox(width: 5),
+                                      Icon(Icons.person_add),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(width: 5),
-                                Icon(Icons.person_add),
-                              ],
-                            ),
-                          ),
                           SizedBox(width: 10),
                         ],
                       ),

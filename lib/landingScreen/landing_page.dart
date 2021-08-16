@@ -100,34 +100,34 @@ class _LandingPageState extends State<LandingPage>
             width: double.infinity,
             alignment: FractionalOffset(_animation.value, 0),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 60),
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 40,
-                  ),
-                ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Text(
-                    "Welcome to the biggest online store",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 30,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   margin: EdgeInsets.only(top: 60),
+          //   width: double.infinity,
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Text(
+          //         "Welcome",
+          //         style: TextStyle(
+          //           fontWeight: FontWeight.w600,
+          //           fontSize: 40,
+          //         ),
+          //       ),
+          //       SizedBox(height: 20),
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(horizontal: 30),
+          //         child: Text(
+          //           "Welcome to the biggest online store",
+          //           textAlign: TextAlign.center,
+          //           style: TextStyle(
+          //             fontWeight: FontWeight.w400,
+          //             fontSize: 30,
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

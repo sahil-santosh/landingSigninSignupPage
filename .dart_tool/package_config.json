@@ -200,6 +200,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "fluttertoast",
+      "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "google_sign_in",
       "rootUri": "file:///D:/development/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.0.7",
       "packageUri": "lib/",
@@ -452,7 +458,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-08-12T06:49:58.315415Z",
+  "generated": "2021-08-14T11:22:00.628373Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:landing_page/auth/forget_password.dart';
 import 'package:landing_page/auth/login.dart';
 import 'package:landing_page/auth/signup.dart';
 import 'package:landing_page/auth/user_state.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
               LogInScreen.routeName: (ctx) => LogInScreen(),
               SignUpScreen.routeName: (ctx) => SignUpScreen(),
               MainScreen.routeName: (ctx) => MainScreen(),
+              ForgetPassword.routeName: (ctx) => ForgetPassword(),
             },
             home: UserState(),
           );
